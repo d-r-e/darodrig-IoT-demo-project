@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wil-playground
+spec:
+  selector:
+    app: wil-playground
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wil-playground
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wil-playground
+  template:
+    metadata:
+      labels:
+        app: wil-playground
+    spec:
+      containers:
+        - name: wil-playground
+          image: wil42/playground:v1
+          
+          ports:
+            - containerPort: 8888
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress-service
+  namespace: argocd
+spec:
+  rules:
+  - http:
+      # listen on path /argo-cd on port 8080
+      paths:
+      - path: /argo-cd
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 8080
+
