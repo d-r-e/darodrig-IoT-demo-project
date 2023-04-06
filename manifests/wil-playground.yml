@@ -36,12 +36,15 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: wil-playground-ingress-service
   namespace: dev
+# annotations:
+#   last-applied-configuration: |
+#     {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"wil-playground-ingress-service","namespace":"dev"},"spec":{"rules":[{"host":"wil-playground.local","http":{"paths":[{"backend":{"service":{"name":"wil-playground","port":{"number":8888}}},"path":"/","pathType":"Prefix"}]}}]}}
 spec:
   rules:
-  - host: wil-playground.dev.darodrig.com
+  - host: wil-playground.local
     http:
       paths:
-        path: /
+      - path: /
         pathType: Prefix
         backend:
           service:
