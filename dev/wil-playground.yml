@@ -40,7 +40,8 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - host: wil-playground.local
+        path: /
         pathType: Prefix
         backend:
           service:
