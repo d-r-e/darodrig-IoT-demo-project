@@ -31,21 +31,18 @@ spec:
           ports:
             - containerPort: 8888
 ---
-apiVersion: networking.k8s.io/v1
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  name: argocd-ingress-service
-  namespace: argocd
+  name: wil-playground-ingress-service
 spec:
   rules:
   - http:
-      # listen on path /argo-cd on port 8080
       paths:
-      - path: /argo-cd
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: argocd-server
+            name: wil-playground
             port:
-              number: 8080
-
+              number: 8888
