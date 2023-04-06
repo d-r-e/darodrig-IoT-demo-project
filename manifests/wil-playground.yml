@@ -38,9 +38,9 @@ metadata:
   namespace: dev
 spec:
   rules:
-  - http:
+  - host: wil-playground.dev.darodrig.com
+    http:
       paths:
-      - host: wil-playground.local
         path: /
         pathType: Prefix
         backend:
